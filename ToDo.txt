@@ -1,0 +1,2 @@
+Vercel e projeyi import et
+post alaninda commits kismini anla
