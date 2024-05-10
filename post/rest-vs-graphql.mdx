@@ -1,0 +1,53 @@
+---
+date: "2024-05-06"
+title: "REST ve GraphQL: Web Hizmetleri Tasarım Modelleri Karşılaştırması"
+subtitle: "Modern web ve mobil uygulamaların iki popüler veri alışverişi yaklaşımı"
+articleType: "Teknik"
+---
+
+## REST (Representational State Transfer)
+
+REST, web üzerinden veri ve işlevlerin paylaşılmasını kolaylaştırmak için tasarlanmış bir web hizmetleri tasarım modelidir.
+
+### Ana Özellikleri:
+- **HTTP Metotları**: HTTP protokolünün temel metotlarını (GET, POST, PUT, DELETE) kullanarak veri erişimini sağlar.
+- **HTTP Durum Kodları**: İsteklerin başarılı olup olmadığını belirten kodlarla iletişim kurar.
+- **Kaynak Tabanlı**: Verileri kaynaklar olarak tanımlar ve her kaynağa bir URI (Uniform Resource Identifier) tahsis eder.
+
+## GraphQL
+
+GraphQL, daha esnek veri sorgulama ve dönüşüm yetenekleri sunan bir sorgu dili ve çalışma zamanıdır.
+
+### Ana Özellikleri:
+- **Veri Sorgulama**: İstemcinin net bir şekilde istediği veri türlerini ve özelliklerini sorgulamasına olanak tanır.
+- **Veri Dönüşümü**: Sadece gerekli verilerin sunucudan istemciye döndürülmesini sağlar, böylece veri aşırı yüklemesini önler.
+- **Dinamik Bağlantı**: Sorgular, sunucudaki veri ve işlevler arasında esnek bağlantılar kurulmasını sağlar.
+
+
+## REST vs GraphQL: Karşılaştırma
+
+<Figure
+   full={false}
+   src="/blog/rest-vs-graphql.jpg"
+   title="REST vs GraphQL"
+/>
+
+
+Her iki teknoloji de web hizmetleri için kullanılsa da, temel farklılıklar bulunmaktadır:
+
+
+1- **Veri Sorgulama**:
+   - **REST**: Sunucudan dönüşen veri genellikle bir kaynak olarak gösterilir.
+   - **GraphQL**: İstemci, sorgularda tam olarak hangi verilerin dönmesini istediğini belirleyebilir.
+
+2- **Veri Dönüşümü**:
+   - **REST**: Veri, istek ile ilişkili olan kaynaklar üzerinden dönüştürülür.
+   - **GraphQL**: Yalnızca istenen veriler dönüştürülür.
+
+3- **Veri Aşırı Yükleme**:
+   - **REST**: Aşırı yükleme sorunları yaşayabilir.
+   - **GraphQL**: Veri aşırı yüklemesini önler ve istemci tarafından kontrol edilir.
+
+4- **Veri Bağlantısı**:
+   - **GraphQL**: Sorgular, gerektiği kadarıyla veri ve işlevler arasında bağlantılar kurar.
+Bu karşılaştırma, REST ve GraphQL arasındaki temel farklılıkları ve her birinin uygulama senaryolarındaki rolünü vurgulamaktadır.

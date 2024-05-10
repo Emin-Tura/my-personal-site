@@ -62,14 +62,16 @@ function Quote({ caption, cite, children, ...props }) {
       {...props}
     >
       <blockquote className="opacity-90">{children}</blockquote>
-      <figcaption className="mt-2 font-serif opacity-70">
-        {`— ${caption}`}
-        {cite && (
-          <>
-            , <cite>{cite}</cite>
-          </>
-        )}
-      </figcaption>
+      {caption &&
+        <figcaption className="mt-2 font-serif opacity-70">
+          {`— ${caption}`}
+          {cite && (
+            <>
+              , <cite>{cite}</cite>
+            </>
+          )}
+        </figcaption>
+      }
     </figure>
   );
 }

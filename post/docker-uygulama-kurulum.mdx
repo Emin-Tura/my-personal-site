@@ -1,0 +1,132 @@
+---
+date: "2024-05-07"
+title: "Docker ile Uygulama Oluşturma"
+subtitle: "İlk Kurulum ve Adım Adım Kılavuz"
+articleType: "Teknik"
+---
+
+## Docker Kurulumu
+
+Docker'ın Ubuntu üzerine kurulumu birkaç adımda gerçekleşir. İşte bu adımlar:
+
+1- **Gerekli Paketlerin Kurulumu:**
+   - Bu adım, Docker'ın kurulumu için gerekli olan paketleri sisteme yükler.
+   <Quote>
+      sudo apt-get install ca-certificates curl gnupg lsb-release -y
+   </Quote>
+
+2- **Docker'ın GPG Anahtarının Eklenmesi:**
+   - Docker'ın resmi GPG anahtarını indirir ve sistem anahtarlıklarına ekler. Bu, paketlerin güvenliğini doğrulamak için kullanılır.
+   <Quote>
+      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+   </Quote>
+
+3- **Docker Repository'sinin Eklenmesi:**
+   - Sisteminize Docker'ın depo adresini ekler. Bu adım, Ubuntu'nun Docker paketlerine doğrudan erişimini sağlar.
+   <Quote>
+      echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   </Quote>
+
+4- **Paket Listelerinin Güncellenmesi ve Docker'ın Kurulumu:**
+   - Yeni eklenen depodan paket listelerini günceller ve Docker'ı kurar.
+   <Quote>
+      sudo apt-get update
+      sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+   </Quote>
+
+5- **Docker Versiyon Kontrolü:**
+   - Kurulumun başarılı olduğunu doğrulamak için Docker versiyonunu kontrol edin.
+   <Quote>
+      sudo docker -v
+   </Quote>
+
+### Docker Compose Kurulumu:
+Docker Compose, birden fazla Docker konteynerini yönetmek ve çalıştırmak için kullanılan bir araçtır. 
+YAML dosyası formatında bir yapılandırma dosyası ile birlikte çalışır. Bu dosya içerisinde, bir uygulamanın hizmetlerinin nasıl inşa edileceği, 
+hangi bağlantı noktalarının açık olacağı ve konteynerler arasındaki bağımlılıklar gibi konular tanımlanır. 
+Bu, özellikle mikro hizmet mimarilerinde birden fazla hizmetin yönetilmesini ve orkestrasyonunu oldukça kolaylaştırır.
+
+1- **Docker Compose'un Kurulumu:**
+   - Docker Compose'u kurar.
+   <Quote>
+      sudo apt-get install docker-compose-plugin docker-compose -y
+   </Quote>
+
+2- **Docker Compose Versiyon Kontrolü:**
+   - Docker Compose kurulumunu doğrulamak için versiyon bilgisini kontrol edin.
+   <Quote>
+      sudo docker-compose -v
+   </Quote>
+
+
+Bu adımlar, Ubuntu üzerinde Docker ve Docker Compose kurulumunu tamamlamanız için gereklidir. 
+Docker ve Docker Compose, uygulamalarınızı hızlı ve tutarlı bir şekilde geliştirme, test etme ve üretime alma konusunda size büyük kolaylıklar sağlar.
+
+
+## Örnek Kullanım:
+Docker kullanarak bir Python uygulamasının nasıl konteynerize edileceğini görelim. 
+Öncelikle bir Dockerfile oluşturarak başlayacağız, ardından bu Docker imajını inşa edip çalıştıracağımızı anlatacağım.
+
+### Dockerfile Oluşturma:
+Dockerfile, bir Docker imajı oluşturmak için kullanılan metin dosyasıdır. Bu dosya, imajın nasıl oluşturulacağını belirten bir dizi komut ve parametre içerir.
+
+**Başlangıç İmgesi:**
+Her Dockerfile, bir **FROM** komutu ile başlar. Bu, yeni imajınızın temel alacağı imajı belirtir. Burada Ubuntu'nun en son sürümünü kullanacağız.
+   <Quote>
+      FROM ubuntu:latest
+   </Quote>
+
+**Paketlerin Yüklenmesi:**
+Ubuntu imajı üzerinde gerekli güncellemeleri yaparak başlayacağız ve ardından Python ve diğer gerekli paketleri yükleyeceğiz.
+   <Quote>
+      RUN apt update && \
+         apt-get install -y python3.8 python3-pip python3.8-dev
+   </Quote>
+**--no-install-recommends** seçeneğiyle gereksiz paketlerin yüklenmesini engelleyebiliriz, ancak burada bunu kullanmadık. Gereksiz paket yüklememek ve imaj boyutunu azaltmak istiyorsanız bu seçeneği ekleyebilirsiniz.
+
+**Uygulama Dosyalarını Kopyalama:**
+Uygulamanın kodunu ve bağımlılıklarını içeren dosyaları Docker imajına kopyalayacağız.
+   <Quote>
+      * WORKDIR /usr/src/app
+      * COPY requirements.txt .
+      * RUN pip3 install --no-cache-dir -r requirements.txt
+      * COPY app.py .
+      * COPY templates/ ./templates/
+   </Quote>
+
+Burada, **WORKDIR** komutu ile çalışma dizinini ayarlıyoruz.
+**COPY** komutları ile yerel dosyaları bu çalışma dizinine kopyalıyoruz. **pip3** ile de **requirements.txt** dosyasında belirtilen Python paketlerini yüklüyoruz.
+
+
+**Port Açma:**
+Uygulamanın iletişim kuracağı portu belirtmek için **EXPOSE** komutunu kullanıyoruz.
+   <Quote>
+      EXPOSE 5000
+   </Quote>
+
+**Varsayılan Komut:**
+Konteyner çalıştırıldığında çalıştırılacak varsayılan komutu belirleyen **CMD**.
+   <Quote>
+      CMD ["python3","/usr/src/app/app.py"]
+   </Quote>
+Bu komut, konteyner içinde app.py Python dosyasını çalıştırır.
+
+### Docker İmajını İnşa ve Çalıştırma:
+
+**İmaj İnşası:**
+Oluşturduğunuz Dockerfile'ı kullanarak Docker imajını şu komutla inşa edebilirsiniz:
+   <Quote>
+      docker build -t mypythonapp .
+   </Quote>
+
+**İmajı Çalıştırma:**
+İmajı şu komutla çalıştırabilirsiniz:
+   <Quote>
+      docker run --name myapp -d -p 5000:5000 mypythonapp
+   </Quote>
+
+Bu komut, mypythonapp imajını kullanarak **myapp** adında bir konteyner oluşturur, 
+arka planda çalışmasını sağlar **(-d)** ve konteynerin 5000 numaralı portunu yerel makinenin 5000 portuna bağlar.
+
+
+Bu adımlarla, Python uygulamamızı Docker üzerinde nasıl konteynerize edeceğimizi öğrenmiş olduk. Bu bilgilerle, uygulamalarınızı kolaylıkla paketleyip dağıtabilirsiniz.

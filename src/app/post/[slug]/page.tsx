@@ -1,11 +1,10 @@
 import { allPosts, Post } from "contentlayer/generated";
-import { format, formatDistanceToNowStrict, parseISO } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { Mdx } from "@/components/mdx";
 import { tr } from "date-fns/locale";
 import Container from "@/components/container";
 import { notFound } from "next/navigation";
 // import ClapsButton from "@/components/claps";
-import BaseLink from "@/components/link";
 import { ReportView } from "@/components/view";
 
 type Props = {
@@ -33,23 +32,6 @@ export async function generateStaticParams(): Promise<Props["params"][]> {
   }));
 }
 
-async function getPostCommits(filePath: string) {
-  const res = await fetch(
-    `https://api.github.com/repos/ademilter/homepage/commits?path=${filePath}`,
-    {
-      headers: {
-        Accept: "application/vnd.github+json",
-        Authorization: `Bearer ${process.env.GITHUB_ACCESS_TOKENS}`,
-      },
-    }
-  );
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
 
 export default async function BlogPost({ params }) {
   const post: Post = allPosts.find(

@@ -1,0 +1,34 @@
+---
+date: "2024-05-07"
+title: "Docker Nedir ve Ne İşe Yarar?"
+subtitle: "Open source bir ‘container’ teknolojisi"
+articleType: "Teknik"
+---
+
+## Docker Nedir ve Ne İşe Yarar?
+
+### Docker'ın Tanımı:
+   Docker, uygulamaların hızlı ve güvenli bir şekilde çalıştırılabilmesi için gereken tüm bağımlılıkları içeren konteynerler oluşturarak, 
+   yazılımın herhangi bir sistemde aynı şekilde çalışmasını garanti eder. Konteyner, uygulamanın çalışması için gerekli olan kod, çalışma zamanı, 
+   sistem araçları, sistem kütüphaneleri gibi tüm bileşenleri kapsar. Docker, aynı işletim sistemi üzerinde, 
+   yüzlerce hatta binlerce birbirinden izole ve bağımsız containerlar sayesinde sanallaştırma sağlayan bir teknolojidir
+
+### Konteynerizasyonun Önemi
+
+Konteynerizasyon, sanal makine teknolojisine benzer şekilde, uygulamaların birbirinden izole bir şekilde çalışmasını sağlar. 
+Ancak konteynerler, sanal makinelerden daha az kaynak tüketir çünkü aynı işletim sistemi çekirdeğini paylaşır ve her konteyner için ayrı bir işletim sistemi gerektirmez.
+Bu da, konteynerlerin daha hızlı başlatılmasını ve daha az kaynak kullanmasını sağlar.
+
+### Docker'ın Avantajları:
+- **Portatiflik** : Uygulamalar, herhangi bir Linux, Windows veya Mac OS üzerinde, "bir kere yaz, her yerde çalıştır" prensibi ile çalışabilir.
+- **Sürüm Kontrolü ve İzlenebilirlik** : Docker imajları, sürüm kontrolü altına alınabilir, böylece herhangi bir sürüme geri dönülebilir ve değişiklikler kolayca izlenebilir.
+- **Geliştirme ve Ortam Uyumu** : Geliştiriciler, yerel makinalarında üretim ortamını aynen simüle edebilirler, böylece "benim bilgisayarımda çalışıyordu" problemini ortadan kaldırırlar.
+- **Mikro Hizmetler** : Docker, mikro hizmet mimarisinin uygulanmasında büyük kolaylıklar sağlar. Her mikro hizmet, bağımsız konteynerler olarak dağıtılabilir ve yönetilebilir.
+
+---
+
+<Figure
+   full={false}
+   src="/blog/dockerKatmanlari.png"
+   title="Docker Katmanları"
+/>

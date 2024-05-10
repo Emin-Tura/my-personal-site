@@ -1,0 +1,62 @@
+---
+date: "2024-05-010"
+title: "SSH Key Nedir ve Ne İşe Yarar?"
+subtitle: "SSH Anahtarı Oluşturma ve GitHub ile Entegrasyon"
+articleType: "Teknik"
+---
+
+## SSH Key Nedir ve Ne İşe Yarar?
+
+SSH anahtarları, bir kullanıcının kendisini GitHub gibi uzak sunuculara kimlik doğrulaması yapmadan (parola kullanmadan) bağlamasını sağlar. 
+Bu, özellikle sık sık kod gönderdiğiniz ve projelerinizde değişiklik yaptığınız durumlar için oldukça yararlıdır. 
+Aşağıda, Debian tabanlı Linux Mint işletim sistemi üzerinde SSH anahtarlarını nasıl oluşturacağınızı ve GitHub'a nasıl ekleyeceğinizi adım adım açıklıyorum.
+
+## SSH Anahtarı Oluşturma ve GitHub ile Entegrasyon
+
+###  1- SSH Anahtarı Oluşturma:
+Terminalinizi açın ve aşağıdaki komutu, kendi GitHub e-posta adresinizi ekleyerek çalıştırın:
+   <Quote>
+      ssh-keygen -t rsa -b 4096 -C "ornek@gmail.com"
+   </Quote>
+
+Bu komut, 4096 bit RSA anahtarı oluşturacak ve size bir anahtar çifti (bir özel anahtar ve bir halka açık anahtar) verecektir. 
+Komutu çalıştırdığınızda, anahtarları kaydetmek için bir konum belirtmeniz istenir. Varsayılan konumu kullanmak için Enter tuşuna basın.
+
+Daha sonra, ekstra güvenlik için bir parola (passphrase) oluşturmanız istenecektir. Bu parola, özel anahtarınızın yetkisiz kullanımını önlemeye yardımcı olur. Parolayı girin ve tekrarlayın.
+
+###  2- SSH Agent'ı Başlatma:
+SSH anahtarınızı kullanabilmek için, öncelikle SSH agent'ı başlatmanız gerekir. Bunu yapmak için aşağıdaki komutu kullanın:
+   <Quote>
+      eval `ssh-agent -s`
+   </Quote>
+
+###  3- SSH Anahtarını Agent'a Ekleme:
+Şimdi, özel anahtarınızı SSH agent'a ekleyin:
+   <Quote>
+      ssh-add ~/.ssh/id_rsa
+   </Quote>
+
+###  4- Halka Açık SSH Anahtarını Görüntüleme:
+Oluşturduğunuz halka açık anahtarı görüntülemek için:
+   <Quote>
+      cat ~/.ssh/id_rsa.pub
+   </Quote>
+Bu komut, terminalde SSH halka açık anahtarınızı gösterir. Bu anahtarı kopyalamanız gerekecek.
+
+
+###  5- SSH Anahtarını GitHub'a Ekleme:
+GitHub hesabınıza gidin ve sağ üst köşedeki profil fotoğrafınıza tıklayarak 'Settings' menüsüne girin. Sol taraftaki menüden 'SSH and GPG keys' seçeneğine tıklayın ve 'New SSH Key' butonuna basın. Açılan formda 'Title' alanına anahtarınız için bir isim verin ve 'Key' alanına halka açık anahtarınızı yapıştırın. Sonra 'Add SSH key' butonuna tıklayarak işlemi tamamlayın.
+<Figure
+   full={false}
+   src="/blog/githubSsh.png"
+/>
+
+###  5- SSH Bağlantısını Test Etme:
+GitHub'a başarıyla SSH ile bağlanıp bağlanmadığınızı kontrol etmek için şu komutu çalıştırın:
+   <Quote>
+      ssh -T git@github.com
+   </Quote>
+
+Eğer "Hi [your-username]! You've successfully authenticated, but GitHub does not provide shell access." mesajını görürseniz, SSH anahtarınız doğru bir şekilde çalışıyor demektir.
+
+Bu adımlarla, artık GitHub üzerindeki projelerinize parola girmeden güvenli bir şekilde erişebilir ve işlemlerinizi kolaylıkla yapabilirsiniz. SSH anahtarları, sizi sürekli kimlik doğrulama işlemlerinden kurtararak iş akışınızı hızlandırır ve güvenliğinizi artırır.

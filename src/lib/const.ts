@@ -808,9 +808,9 @@ export const HADITH = [
   },
   {
     turkish:
-      "Ebû Zer Cündeb İbni Cünâde radıyallahu anh’den rivayet edildiğine göre bazı insanlar: - Ey Allah’ın Resûlü! Zenginler bütün sevapları alıp götürüyorlar. Zira bizler gibi namaz kılıyor, bizler gibi oruç tutuyor ve ayrıca mallarının fazlasından da sadaka veriyorlar, dediler. Peygamber sallallahu aleyhi ve sellem: - “Allah size sadaka verme imkânı bahşetmedi mi (sanıyorsunuz)? Her tesbih sadaka, her tekbir sadaka, her tahmid sadaka, her tehlil sadakadır. İyiliği emretmek sadaka, kötülükten sakındırmak sadakadır. Hatta (her) birinizin eşiyle yatması bile sadakadır” buyurdu. - Ey Allah’ın Resûlü, cinsel arzusunu tatmin eden birine bundan da mı sevap var? dediler. Peygamber sallallahu aleyhi ve sellem: - “Bu istek ve ihtiyacını haram yoldan giderseydi, günah olmayacak mıydı? Helâl ve meşrû yoldan gidermesinde de elbette sevap vardır”",
+      "Ebû Zer Cündeb İbni Cünâde radıyallahu anh’den rivayet edildiğine göre bazı insanlar: - Ey Allah’ın Resûlü! Zenginler bütün sevapları alıp götürüyorlar. Zira bizler gibi namaz kılıyor, bizler gibi oruç tutuyor ve ayrıca mallarının fazlasından da sadaka veriyorlar, dediler. Peygamber sallallahu aleyhi ve sellem: - “Allah size sadaka verme imkânı bahşetmedi mi (sanıyorsunuz)? Her tesbih sadaka, her tekbir sadaka, her tahmid sadaka, her tehlil sadakadır. İyiliği emretmek sadaka, kötülükten sakındırmak sadakadır. Hatta (her) birinizin eşiyle yatması bile sadakadır” buyurdu. - Ey Allah’ın Resûlü, cinsel arzusunu tatmin eden birine bundan da mı sevap var? dediler. Peygamber sallallahu aleyhi ve sellem: - “Bu istek ve ihtiyacını haram yoldan giderseydi, günah olmayacak mıydı? Helâl ve meşrû yoldan gidermesinde de elbette sevap vardır” buyurdu.",
     hadith_id: "121",
-    ravi: "buyurdu. Müslim, Zekât 53, Mesâcid 142",
+    ravi: "Müslim, Zekât 53, Mesâcid 142",
   },
   {
     turkish:
